@@ -23,6 +23,7 @@ sky_material = SubResource("ProceduralSkyMaterial_fj7yv")
 
 [sub_resource type="Environment" id="Environment_aqk2v"]
 background_mode = 2
+background_energy_multiplier = 2.0
 sky = SubResource("Sky_tlwt5")
 
 [node name="world" type="Node3D"]
@@ -37,9 +38,6 @@ mesh = SubResource("PlaneMesh_tlwt5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_aqk2v")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_aqk2v")
-
 [node name="Table1" type="MeshInstance3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -5, 0, -15)
 mesh = ExtResource("2_fj7yv")
@@ -49,9 +47,22 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -1.1, 0, -15)
 mesh = ExtResource("2_fj7yv")
 skeleton = NodePath("../Table1")
 
+[node name="Table3" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 2.8, 0, -15)
+mesh = ExtResource("2_fj7yv")
+skeleton = NodePath("../Table1")
+
+[node name="Table4" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 6.8, 0, -15)
+mesh = ExtResource("2_fj7yv")
+skeleton = NodePath("../Table1")
+
 [node name="tecnico_player_mesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("3_tlwt5")
 
 [node name="aluno_player_mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 mesh = ExtResource("4_aqk2v")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aqk2v")
