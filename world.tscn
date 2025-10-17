@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://8gyr2ibkbbrf"]
+[gd_scene load_steps=11 format=3 uid="uid://8gyr2ibkbbrf"]
 
-[ext_resource type="Script" uid="uid://b06117i3qa5sw" path="res://view.gd" id="1_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://beylekrwm6wkl" path="res://kenney_pattern-pack/Vector/pattern_50.svg" id="1_f3sb7"]
-[ext_resource type="PackedScene" uid="uid://c7p501ddq3ed0" path="res://kenney_blocky-characters_20/Models/GLB format/character-c.glb" id="2_fj7yv"]
-[ext_resource type="Script" uid="uid://blxll44lqy2bg" path="res://player.gd" id="2_tlwt5"]
+[ext_resource type="ArrayMesh" uid="uid://bdrhh4fwrwvvd" path="res://kenney_furniture-kit/Models/OBJ format/table.obj" id="2_fj7yv"]
+[ext_resource type="ArrayMesh" uid="uid://b7wa1pjttgdas" path="res://kenney_blocky-characters_20/Models/OBJ format/character-c.obj" id="3_tlwt5"]
+[ext_resource type="ArrayMesh" uid="uid://e6170ya4016e" path="res://kenney_blocky-characters_20/Models/OBJ format/character-b.obj" id="4_aqk2v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fj7yv"]
 albedo_color = Color(1.6081856, 1.1120775, 0.62295645, 1)
@@ -16,9 +16,6 @@ uv1_world_triplanar = true
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_aqk2v"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_fj7yv"]
-size = Vector3(1.6081009, 2.7001343, 0.80822754)
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
 
 [sub_resource type="Sky" id="Sky_tlwt5"]
@@ -30,12 +27,6 @@ sky = SubResource("Sky_tlwt5")
 
 [node name="world" type="Node3D"]
 
-[node name="camera_pivot" type="Node3D" parent="." node_paths=PackedStringArray("target")]
-script = ExtResource("1_aqk2v")
-target = NodePath("../Player")
-
-[node name="Camera" type="Camera3D" parent="camera_pivot"]
-
 [node name="floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_fj7yv")
@@ -46,15 +37,21 @@ mesh = SubResource("PlaneMesh_tlwt5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_aqk2v")
 
-[node name="Player" type="CharacterBody3D" parent="."]
-script = ExtResource("2_tlwt5")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0021629333, 1.3519592, 0.0017700195)
-shape = SubResource("BoxShape3D_fj7yv")
-
-[node name="Player_Mesh" parent="Player" instance=ExtResource("2_fj7yv")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aqk2v")
+
+[node name="Table1" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -5, 0, -15)
+mesh = ExtResource("2_fj7yv")
+
+[node name="Table2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -1.1, 0, -15)
+mesh = ExtResource("2_fj7yv")
+skeleton = NodePath("../Table1")
+
+[node name="tecnico_player_mesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("3_tlwt5")
+
+[node name="aluno_player_mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = ExtResource("4_aqk2v")
